@@ -1,4 +1,37 @@
 -- =============================
+-- =============================
+CREATE DATABASE IF NOT EXISTS rndc_db
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+
+USE rndc_db;
+
+
+-- =============================
+-- USUARIOS
+-- =============================
+CREATE TABLE usuarios (
+id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+nombre VARCHAR(150) NOT NULL,
+email VARCHAR(150) NOT NULL UNIQUE,
+password_hash VARCHAR(255) NOT NULL,
+rol ENUM('ADMIN','OPERADOR','CONSULTA') DEFAULT 'OPERADOR',
+activo BOOLEAN DEFAULT TRUE,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+-- =============================
+-- EMPRESAS
+-- =============================
+CREATE TABLE empresas (
+id_empresa INT AUTO_INCREMENT PRIMARY KEY,
+razon_social VARCHAR(200) NOT NULL,
+nit VARCHAR(20) NOT NULL UNIQUE,
+email VARCHAR(150),
+telefono VARCHAR(50)
 );
 
 
@@ -134,11 +167,10 @@ PRIMARY KEY (id_manifiesto, id_vehiculo),
 FOREIGN KEY (id_manifiesto) REFERENCES manifiestos(id_manifiesto),
 FOREIGN KEY (id_vehiculo) REFERENCES vehiculos(id_vehiculo)
 );
-
-
 CREATE TABLE conductores (
 id_conductor INT AUTO_INCREMENT PRIMARY KEY,
-nombre VARCHAR(150) NOT NULL,id_tipo_identificacion INT,
+nombre VARCHAR(150) NOT NULL,
+id_tipo_identificacion INT,
 numero_identificacion VARCHAR(50),
 telefono VARCHAR(50),
 categoria_licencia VARCHAR(10),
