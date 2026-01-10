@@ -1,26 +1,26 @@
 <?php
-require_once __DIR__ . '/../Models/ConsultaManifiestoModel.php';
+require_once __DIR__ . '/../Models/ConsultaRemesaModel.php';
 
-class ConsultaManifiestoController {
+class ConsultaRemesaController {
     private $model;
 
     public function __construct() {
-        $this->model = new ConsultaManifiestoModel();
+        $this->model = new ConsultaRemesaModel();
     }
 
     /**
      * Vista principal de consulta
      */
     public function index() {
-        require __DIR__ . '/../Views/consultaManifiesto.php';
+        require __DIR__ . '/../Views/consultaRemesa.php';
     }
 
     /**
-     * Buscar manifiestos con filtros (AJAX)
+     * Buscar remesas con filtros (AJAX)
      */
     public function buscar() {
         try {
-            error_log("📥 Recibiendo solicitud de búsqueda de manifiestos");
+            error_log("📥 Recibiendo solicitud de búsqueda de remesas");
             
             // Obtener datos del POST
             $json = file_get_contents('php://input');
@@ -28,61 +28,61 @@ class ConsultaManifiestoController {
 
             error_log("🔍 Filtros recibidos: " . print_r($filtros, true));
 
-            // Si no hay filtros, mostrar todos los manifiestos
+            // Si no hay filtros, mostrar todas las remesas
             if (empty($filtros) || !is_array($filtros)) {
                 $filtros = [];
             }
 
-            // Buscar manifiestos
-            $manifiestos = $this->model->buscarManifiestos($filtros);
+            // Buscar remesas
+            $remesas = $this->model->buscarRemesas($filtros);
 
-            error_log("✅ Manifiestos encontrados: " . count($manifiestos));
+            error_log("✅ Remesas encontradas: " . count($remesas));
 
             $this->jsonResponse([
                 'success' => true,
-                'manifiestos' => $manifiestos,
-                'total' => count($manifiestos)
+                'remesas' => $remesas,
+                'total' => count($remesas)
             ]);
 
         } catch (Exception $e) {
             error_log("❌ Error en buscar: " . $e->getMessage());
             $this->jsonResponse([
                 'success' => false,
-                'message' => 'Error al buscar manifiestos: ' . $e->getMessage()
+                'message' => 'Error al buscar remesas: ' . $e->getMessage()
             ], 500);
         }
     }
 
     /**
-     * Obtener detalle completo de un manifiesto (AJAX)
+     * Obtener detalle completo de una remesa (AJAX)
      */
     public function detalle() {
         try {
-            error_log("📥 Recibiendo solicitud de detalle de manifiesto");
+            error_log("📥 Recibiendo solicitud de detalle de remesa");
             
             // Obtener datos del POST
             $json = file_get_contents('php://input');
             $data = json_decode($json, true);
 
-            if (empty($data['id_manifiesto'])) {
-                throw new Exception('ID de manifiesto no proporcionado');
+            if (empty($data['id_remesa'])) {
+                throw new Exception('ID de remesa no proporcionado');
             }
 
-            $idManifiesto = (int)$data['id_manifiesto'];
-            error_log("🔍 Buscando manifiesto ID: " . $idManifiesto);
+            $idRemesa = (int)$data['id_remesa'];
+            error_log("🔍 Buscando remesa ID: " . $idRemesa);
 
             // Obtener detalle
-            $manifiesto = $this->model->obtenerDetalleManifiesto($idManifiesto);
+            $remesa = $this->model->obtenerDetalleRemesa($idRemesa);
 
-            if (!$manifiesto) {
-                throw new Exception('Manifiesto no encontrado');
+            if (!$remesa) {
+                throw new Exception('Remesa no encontrada');
             }
 
-            error_log("✅ Manifiesto encontrado: " . $manifiesto['consecutivo']);
+            error_log("✅ Remesa encontrada: " . $remesa['consecutivo']);
 
             $this->jsonResponse([
                 'success' => true,
-                'manifiesto' => $manifiesto
+                'remesa' => $remesa
             ]);
 
         } catch (Exception $e) {
@@ -95,7 +95,7 @@ class ConsultaManifiestoController {
     }
 
     /**
-     * Obtener estadísticas de manifiestos (AJAX)
+     * Obtener estadísticas de remesas (AJAX)
      */
     public function estadisticas() {
         try {
@@ -123,7 +123,7 @@ class ConsultaManifiestoController {
     }
 
     /**
-     * Exportar manifiestos a CSV
+     * Exportar remesas a CSV
      */
     public function exportarCSV() {
         try {
@@ -134,11 +134,11 @@ class ConsultaManifiestoController {
                 $filtros = [];
             }
 
-            $manifiestos = $this->model->buscarManifiestos($filtros);
+            $remesas = $this->model->buscarRemesas($filtros);
 
             // Generar CSV
             header('Content-Type: text/csv; charset=utf-8');
-            header('Content-Disposition: attachment; filename="manifiestos_' . date('Y-m-d') . '.csv"');
+            header('Content-Disposition: attachment; filename="remesas_' . date('Y-m-d') . '.csv"');
 
             $output = fopen('php://output', 'w');
             
@@ -149,31 +149,25 @@ class ConsultaManifiestoController {
             fputcsv($output, [
                 'Consecutivo',
                 'Fecha Expedición',
-                'Placa Vehículo',
-                'Conductor',
-                'Cédula Conductor',
-                'Municipio Origen',
-                'Municipio Destino',
-                'Tipo Manifiesto',
-                'Cantidad Remesas',
-                'Kilogramos Total',
-                'Empresa'
+                'Propietario',
+                'Empresa Generadora',
+                'Municipio Cargue',
+                'Municipio Descargue',
+                'Tipo Operación',
+                'Orden Servicio'
             ]);
 
             // Datos
-            foreach ($manifiestos as $manifiesto) {
+            foreach ($remesas as $remesa) {
                 fputcsv($output, [
-                    $manifiesto['consecutivo'] ?? '',
-                    $manifiesto['fecha_expedicion'] ?? '',
-                    $manifiesto['placa_vehiculo'] ?? '',
-                    $manifiesto['conductor_nombre'] ?? '',
-                    $manifiesto['conductor_cedula'] ?? '',
-                    $manifiesto['municipio_origen'] ?? '',
-                    $manifiesto['municipio_destino'] ?? '',
-                    $manifiesto['tipo_manifiesto'] ?? '',
-                    $manifiesto['cantidad_remesas'] ?? '',
-                    $manifiesto['kilogramos_total'] ?? '',
-                    $manifiesto['empresa_razon_social'] ?? ''
+                    $remesa['consecutivo'] ?? '',
+                    $remesa['fecha_expedicion'] ?? '',
+                    $remesa['propietario_nombre'] ?? '',
+                    $remesa['empresa_generadora'] ?? '',
+                    $remesa['municipio_cargue'] ?? '',
+                    $remesa['municipio_descargue'] ?? '',
+                    $remesa['tipo_operacion'] ?? '',
+                    $remesa['orden_servicio'] ?? ''
                 ]);
             }
 

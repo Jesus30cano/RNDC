@@ -1,5 +1,5 @@
 // ============================================
-// consulta.js - Consulta de Remesas
+// consultaManifiesto.js - Consulta de Manifiestos
 // ============================================
 let currentPage = 1;
 const resultsPerPage = 10;
@@ -15,66 +15,45 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Cargar todas las remesas al inicio
-    loadAllRemesas();
+    // Cargar todos los manifiestos al inicio
+    loadAllManifiestos();
 });
 
 /**
- * Cargar todas las remesas desde el servidor
+ * Cargar todos los manifiestos desde el servidor
  */
-function loadAllRemesas() {
-    console.log('📡 loadAllRemesas → iniciando petición');
-
+function loadAllManifiestos() {
     showLoading(true);
-
-    fetch('/RNDC/index.php?c=consultaRemesa&a=buscar', {
+    
+    fetch('/RNDC/index.php?c=consultaManifiesto&a=buscar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({})
     })
-    .then(response => {
-        console.log('📥 HTTP status:', response.status);
-        console.log('📥 Headers:', [...response.headers.entries()]);
-        return response.text(); // 👈 IMPORTANTE
-    })
-    .then(text => {
-        console.log('📥 Respuesta RAW del servidor:', text);
-
-        let data;
-        try {
-            data = JSON.parse(text);
-        } catch (e) {
-            console.error('❌ No es JSON válido');
-            showError('La API no devolvió JSON válido');
-            return;
-        }
-
-        console.log('✅ JSON parseado:', data);
-
+    .then(response => response.json())
+    .then(data => {
         if (data.success) {
-            allResults = data.remesas || [];
+            allResults = data.manifiestos || [];
             currentPage = 1;
             displayResults();
         } else {
-            showError(data.message || 'Error al cargar las remesas');
+            showError(data.message || 'Error al cargar los manifiestos');
             allResults = [];
             displayResults();
         }
     })
     .catch(error => {
-        console.error('🔥 Error FETCH:', error);
+        console.error('Error:', error);
         showError('Error de conexión al servidor');
         allResults = [];
         displayResults();
     })
     .finally(() => {
         showLoading(false);
-        console.log('🏁 loadAllRemesas → fin');
     });
 }
-
 
 /**
  * Realizar búsqueda con filtros
@@ -92,7 +71,7 @@ function performSearch() {
     
     showLoading(true);
     
-    fetch('/RNDC/index.php?c=consultaRemesa&a=buscar', {
+    fetch('/RNDC/index.php?c=consultaManifiesto&a=buscar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -102,7 +81,7 @@ function performSearch() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            allResults = data.remesas || [];
+            allResults = data.manifiestos || [];
             currentPage = 1;
             displayResults();
         } else {
@@ -133,7 +112,7 @@ function displayResults() {
     if (allResults.length === 0) {
         resultsBody.innerHTML = '';
         noResults.style.display = 'block';
-        resultsCount.textContent = '0 remesas encontradas';
+        resultsCount.textContent = '0 manifiestos encontrados';
         document.getElementById('pagination').innerHTML = '';
         return;
     }
@@ -146,24 +125,24 @@ function displayResults() {
     const paginatedResults = allResults.slice(start, end);
     
     // Mostrar resultados
-    resultsBody.innerHTML = paginatedResults.map(remesa => `
+    resultsBody.innerHTML = paginatedResults.map(manifiesto => `
         <tr>
-            <td>${escapeHtml(remesa.consecutivo || 'N/A')}</td>
-            <td>${formatDate(remesa.fecha_expedicion)}</td>
-            <td>${escapeHtml(remesa.propietario_nombre || 'N/A')}</td>
-            <td>${escapeHtml(remesa.empresa_generadora || 'N/A')}</td>
-            <td>${escapeHtml(remesa.municipio_cargue || 'N/A')}</td>
-            <td>${escapeHtml(remesa.municipio_descargue || 'N/A')}</td>
-            <td>${escapeHtml(remesa.tipo_operacion || 'N/A')}</td>
+            <td>${escapeHtml(manifiesto.consecutivo || 'N/A')}</td>
+            <td>${formatDate(manifiesto.fecha_expedicion)}</td>
+            <td>${escapeHtml(manifiesto.placa_vehiculo || 'N/A')}</td>
+            <td>${escapeHtml(manifiesto.conductor_nombre || 'N/A')}</td>
+            <td>${escapeHtml(manifiesto.municipio_origen || 'N/A')}</td>
+            <td>${escapeHtml(manifiesto.municipio_destino || 'N/A')}</td>
+            <td>${escapeHtml(manifiesto.tipo_manifiesto || 'N/A')}</td>
             <td>
-                <button class="btn-view" onclick="viewDetails(${remesa.id_remesa})">
+                <button class="btn-view" onclick="viewDetails(${manifiesto.id_manifiesto})">
                     Ver Detalle
                 </button>
             </td>
         </tr>
     `).join('');
     
-    resultsCount.textContent = `${allResults.length} remesa${allResults.length !== 1 ? 's' : ''} encontrada${allResults.length !== 1 ? 's' : ''}`;
+    resultsCount.textContent = `${allResults.length} manifiesto${allResults.length !== 1 ? 's' : ''} encontrado${allResults.length !== 1 ? 's' : ''}`;
     
     // Generar paginación
     generatePagination();
@@ -235,22 +214,22 @@ function changePage(page) {
 }
 
 /**
- * Ver detalles de una remesa
+ * Ver detalles de un manifiesto
  */
-function viewDetails(idRemesa) {
+function viewDetails(idManifiesto) {
     showLoading(true);
     
-    fetch('/RNDC/index.php?c=consultaRemesa&a=detalle', {
+    fetch('/RNDC/index.php?c=consultaManifiesto&a=detalle', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ id_remesa: idRemesa })
+        body: JSON.stringify({ id_manifiesto: idManifiesto })
     })
     .then(response => response.json())
     .then(data => {
-        if (data.success && data.remesa) {
-            displayDetailModal(data.remesa);
+        if (data.success && data.manifiesto) {
+            displayDetailModal(data.manifiesto);
         } else {
             showError(data.message || 'Error al cargar el detalle');
         }
@@ -267,139 +246,165 @@ function viewDetails(idRemesa) {
 /**
  * Mostrar modal con detalles
  */
-function displayDetailModal(remesa) {
+function displayDetailModal(m) {
     const modalContent = document.getElementById('modalContent');
     
     modalContent.innerHTML = `
         <div class="detail-section">
-            <h3>Información General</h3>
+            <h3>Información General del Manifiesto</h3>
             <div class="detail-grid">
                 <div class="detail-item">
                     <strong>Consecutivo:</strong>
-                    <span>${escapeHtml(remesa.consecutivo || 'N/A')}</span>
+                    <span>${escapeHtml(m.consecutivo || 'N/A')}</span>
                 </div>
                 <div class="detail-item">
                     <strong>Fecha Expedición:</strong>
-                    <span>${formatDate(remesa.fecha_expedicion)}</span>
+                    <span>${formatDate(m.fecha_expedicion)}</span>
                 </div>
                 <div class="detail-item">
-                    <strong>Tipo Operación:</strong>
-                    <span>${escapeHtml(remesa.tipo_operacion || 'N/A')}</span>
+                    <strong>Tipo Manifiesto:</strong>
+                    <span>${escapeHtml(m.tipo_manifiesto || 'N/A')}</span>
                 </div>
                 <div class="detail-item">
-                    <strong>Orden de Servicio:</strong>
-                    <span>${escapeHtml(remesa.orden_servicio || 'N/A')}</span>
+                    <strong>Viajes por Día:</strong>
+                    <span>${m.viajes_dia || 'N/A'}</span>
                 </div>
             </div>
         </div>
-        
+
         <div class="detail-section">
-            <h3>Propietario/Generador de Carga</h3>
-            <div class="detail-grid">
-                <div class="detail-item">
-                    <strong>Nombre:</strong>
-                    <span>${escapeHtml(remesa.propietario_nombre || 'N/A')}</span>
-                </div>
-                <div class="detail-item">
-                    <strong>Identificación:</strong>
-                    <span>${escapeHtml(remesa.propietario_tipo_identificacion || '')} ${escapeHtml(remesa.propietario_num_id || 'N/A')}</span>
-                </div>
-                <div class="detail-item">
-                    <strong>Municipio:</strong>
-                    <span>${escapeHtml(remesa.propietario_municipio_nombre || 'N/A')}</span>
-                </div>
-                <div class="detail-item">
-                    <strong>Sede:</strong>
-                    <span>${escapeHtml(remesa.propietario_sede || 'N/A')}</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="detail-section">
-            <h3>Empresa Generadora</h3>
+            <h3>Empresa</h3>
             <div class="detail-grid">
                 <div class="detail-item">
                     <strong>Razón Social:</strong>
-                    <span>${escapeHtml(remesa.empresa_generadora || 'N/A')}</span>
+                    <span>${escapeHtml(m.empresa_razon_social || 'N/A')}</span>
                 </div>
                 <div class="detail-item">
                     <strong>NIT:</strong>
-                    <span>${escapeHtml(remesa.empresa_nit || 'N/A')}</span>
+                    <span>${escapeHtml(m.empresa_nit || 'N/A')}</span>
                 </div>
             </div>
         </div>
         
-        ${remesa.sitios_cargue && remesa.sitios_cargue.length > 0 ? `
         <div class="detail-section">
-            <h3>Sitios de Cargue</h3>
-            ${remesa.sitios_cargue.map(sitio => `
-                <div class="detail-grid">
+            <h3>Ruta</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <strong>Municipio Origen:</strong>
+                    <span>${escapeHtml(m.municipio_origen_nombre || 'N/A')}</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Municipio Destino:</strong>
+                    <span>${escapeHtml(m.municipio_destino_nombre || 'N/A')}</span>
+                </div>
+                ${m.municipio_intermedio_nombre ? `
+                <div class="detail-item">
+                    <strong>Municipio Intermedio:</strong>
+                    <span>${escapeHtml(m.municipio_intermedio_nombre)}</span>
+                </div>
+                ` : ''}
+                ${m.via_utilizada ? `
+                <div class="detail-item">
+                    <strong>Vía Utilizada:</strong>
+                    <span>${escapeHtml(m.via_utilizada)}</span>
+                </div>
+                ` : ''}
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Titular del Manifiesto</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <strong>Nombre:</strong>
+                    <span>${escapeHtml(m.titular_nombre || 'N/A')}</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Identificación:</strong>
+                    <span>${escapeHtml(m.titular_tipo_identificacion_nombre || '')} ${escapeHtml(m.titular_numero_identificacion || 'N/A')}</span>
+                </div>
+                ${m.titular_telefono ? `
+                <div class="detail-item">
+                    <strong>Teléfono:</strong>
+                    <span>${escapeHtml(m.titular_telefono)}</span>
+                </div>
+                ` : ''}
+            </div>
+        </div>
+        
+        ${m.vehiculos && m.vehiculos.length > 0 ? `
+        <div class="detail-section">
+            <h3>Vehículos</h3>
+            ${m.vehiculos.map(v => `
+                <div class="detail-grid" style="margin-bottom: 15px; padding: 10px; background: #f9f9f9; border-radius: 5px;">
                     <div class="detail-item">
-                        <strong>Nombre:</strong>
-                        <span>${escapeHtml(sitio.nombre || 'N/A')}</span>
+                        <strong>Placa:</strong>
+                        <span>${escapeHtml(v.placa || 'N/A')}</span>
                     </div>
                     <div class="detail-item">
-                        <strong>Dirección:</strong>
-                        <span>${escapeHtml(sitio.direccion || 'N/A')}</span>
+                        <strong>Configuración:</strong>
+                        <span>${escapeHtml(v.configuracion || 'N/A')}</span>
                     </div>
+                    ${v.remolque_placa ? `
                     <div class="detail-item">
-                        <strong>Municipio:</strong>
-                        <span>${escapeHtml(sitio.municipio || 'N/A')}</span>
+                        <strong>Remolque:</strong>
+                        <span>${escapeHtml(v.remolque_placa)}</span>
                     </div>
+                    ` : ''}
                     <div class="detail-item">
-                        <strong>Fecha Cita:</strong>
-                        <span>${formatDate(sitio.fecha_cita)} ${sitio.hora_cita || ''}</span>
+                        <strong>Tenedor:</strong>
+                        <span>${escapeHtml(v.tenedor_nombre || 'N/A')}</span>
                     </div>
                 </div>
-            `).join('<hr>')}
+            `).join('')}
         </div>
         ` : ''}
         
-        ${remesa.sitios_descargue && remesa.sitios_descargue.length > 0 ? `
+        ${m.conductores && m.conductores.length > 0 ? `
         <div class="detail-section">
-            <h3>Sitios de Descargue</h3>
-            ${remesa.sitios_descargue.map(sitio => `
-                <div class="detail-grid">
+            <h3>Conductores</h3>
+            ${m.conductores.map(c => `
+                <div class="detail-grid" style="margin-bottom: 15px; padding: 10px; background: #f9f9f9; border-radius: 5px;">
                     <div class="detail-item">
-                        <strong>Nombre:</strong>
-                        <span>${escapeHtml(sitio.nombre || 'N/A')}</span>
+                        <strong>${c.orden === 1 ? 'Conductor Principal' : 'Segundo Conductor'}:</strong>
+                        <span>${escapeHtml(c.nombre || 'N/A')}</span>
                     </div>
                     <div class="detail-item">
-                        <strong>Dirección:</strong>
-                        <span>${escapeHtml(sitio.direccion || 'N/A')}</span>
+                        <strong>Identificación:</strong>
+                        <span>${escapeHtml(c.tipo_identificacion || '')} ${escapeHtml(c.numero_identificacion || 'N/A')}</span>
                     </div>
                     <div class="detail-item">
-                        <strong>Municipio:</strong>
-                        <span>${escapeHtml(sitio.municipio || 'N/A')}</span>
+                        <strong>Licencia:</strong>
+                        <span>Cat. ${escapeHtml(c.categoria_licencia || 'N/A')} - ${escapeHtml(c.numero_licencia || 'N/A')}</span>
                     </div>
                     <div class="detail-item">
-                        <strong>Fecha Cita:</strong>
-                        <span>${formatDate(sitio.fecha_cita)} ${sitio.hora_cita || ''}</span>
+                        <strong>Vencimiento Licencia:</strong>
+                        <span>${formatDate(c.vencimiento_licencia)}</span>
                     </div>
                 </div>
-            `).join('<hr>')}
+            `).join('')}
         </div>
         ` : ''}
         
-        ${remesa.productos && remesa.productos.length > 0 ? `
+        ${m.remesas && m.remesas.length > 0 ? `
         <div class="detail-section">
-            <h3>Productos</h3>
-            <table style="width: 100%; border-collapse: collapse;">
+            <h3>Remesas Asociadas (${m.cantidad_remesas || m.remesas.length})</h3>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
                 <thead>
                     <tr style="background: #f0f0f0;">
-                        <th style="padding: 8px; border: 1px solid #ddd;">Descripción</th>
-                        <th style="padding: 8px; border: 1px solid #ddd;">Naturaleza</th>
-                        <th style="padding: 8px; border: 1px solid #ddd;">Cantidad</th>
-                        <th style="padding: 8px; border: 1px solid #ddd;">Unidad</th>
+                        <th style="padding: 8px; border: 1px solid #ddd;">Consecutivo</th>
+                        <th style="padding: 8px; border: 1px solid #ddd;">Propietario</th>
+                        <th style="padding: 8px; border: 1px solid #ddd;">Cargue</th>
+                        <th style="padding: 8px; border: 1px solid #ddd;">Descargue</th>
                     </tr>
                 </thead>
                 <tbody>
-                    ${remesa.productos.map(prod => `
+                    ${m.remesas.map(r => `
                         <tr>
-                            <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(prod.descripcion || 'N/A')}</td>
-                            <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(prod.naturaleza_carga || 'N/A')}</td>
-                            <td style="padding: 8px; border: 1px solid #ddd;">${formatNumber(prod.cantidad_producto)}</td>
-                            <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(prod.unidad_medida || 'N/A')}</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(r.consecutivo || 'N/A')}</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(r.propietario_nombre || 'N/A')}</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(r.municipios_cargue || 'N/A')}</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">${escapeHtml(r.municipios_descargue || 'N/A')}</td>
                         </tr>
                     `).join('')}
                 </tbody>
@@ -407,10 +412,48 @@ function displayDetailModal(remesa) {
         </div>
         ` : ''}
         
-        ${remesa.observaciones ? `
+        ${m.valores ? `
         <div class="detail-section">
-            <h3>Observaciones</h3>
-            <p>${escapeHtml(remesa.observaciones)}</p>
+            <h3>Información de Valores</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <strong>Valor del Viaje:</strong>
+                    <span>${formatCurrency(m.valores.valor_viaje)}</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Retención Fuente:</strong>
+                    <span>${formatCurrency(m.valores.retencion_fuente)}</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Anticipo:</strong>
+                    <span>${formatCurrency(m.valores.anticipo)}</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Neto a Pagar:</strong>
+                    <span>${formatCurrency(m.valores.neto_pagar)}</span>
+                </div>
+            </div>
+        </div>
+        ` : ''}
+        
+        <div class="detail-section">
+            <h3>Resumen de Carga</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <strong>Kilogramos Total:</strong>
+                    <span>${formatNumber(m.kilogramos_total)} kg</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Galones Total:</strong>
+                    <span>${formatNumber(m.galones_total)} gal</span>
+                </div>
+            </div>
+        </div>
+        
+        ${m.recomendaciones ? `
+        <div class="detail-section">
+            <h3>Recomendaciones</h3>
+            <p>${escapeHtml(m.recomendaciones)}</p>
         </div>
         ` : ''}
     `;
@@ -426,7 +469,7 @@ function closeModal() {
 }
 
 /**
- * Imprimir remesa
+ * Imprimir manifiesto
  */
 function printManifiesto() {
     window.print();
@@ -442,7 +485,7 @@ function printManifiesto() {
  */
 function clearFilters() {
     document.getElementById('searchForm').reset();
-    loadAllRemesas();
+    loadAllManifiestos();
 }
 
 /**
@@ -519,6 +562,14 @@ function formatDate(dateStr) {
 function formatNumber(num) {
     if (num == null || num === '') return 'N/A';
     return parseFloat(num).toLocaleString('es-CO', { maximumFractionDigits: 2 });
+}
+
+/**
+ * Formatear moneda
+ */
+function formatCurrency(num) {
+    if (num == null || num === '') return 'N/A';
+    return '$' + parseFloat(num).toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 // Cerrar modal al hacer clic fuera de él

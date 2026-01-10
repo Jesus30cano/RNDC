@@ -222,6 +222,11 @@
                 <h3>Manifiesto de Carga</h3>
                 <p>Expedir manifiestos de carga con información del vehículo, conductores, titular y datos del viaje completo.</p>
             </a>
+            <a href="index.php?c=consultaRemesa&a=index" class="module-card consulta">
+                <div class="module-icon">🔍</div>
+                <h3>Consultar Remesas</h3>
+                <p>Buscar y visualizar remesas registradas. Consulte por número de remesa, fecha, propietario o empresa generadora.</p>
+            </a>
 
             <a href="index.php?c=consultaManifiesto&a=index" class="module-card consulta">
                 <div class="module-icon">🔍</div>
