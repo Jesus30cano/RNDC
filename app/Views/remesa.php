@@ -25,19 +25,18 @@
             <div class="form-section">
                 <h2 class="section-title">Remesa</h2>
                 <div class="form-grid">
-                    <div class="form-group ">
+                    <div class="form-group">
                         <label>Nombre Empresa</label>
-                        <input type="text" value="TRANSPORTES QUIROGA S.A.S" required>
+                        <input type="text" id="nombreEmpresa" name="nombreEmpresa" value="" required>
                     </div>
                     <div class="form-group">
                         <label>NIT Empresa</label>
-                        <input type="text" value="8020099265" required>
+                        <input type="text" id="nitEmpresa" name="nitEmpresa" value="" required>
                     </div>
                     <div class="form-group">
                         <label>Usuario</label>
-                        <input type="text" value="TRANSQUIROGA@0144" required>
+                        <input type="text" id="usuario" name="usuario" value="" required>
                     </div>
-                    
                 </div>
             </div>
 
@@ -47,66 +46,82 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label>Tipo Identificación *</label>
-                        <select name="propTipoId" required>
-                            <option value="CC">Cédula Ciudadanía</option>
-                            <option value="NIT">NIT</option>
-                            <option value="CE">Cédula Extranjería</option>
+                        <select id="propTipoId" name="propTipoId" required>
+                            <option value="">Seleccione...</option>
+                            <option value="1">Cédula de Ciudadanía</option>
+                            <option value="2">NIT</option>
+                            <option value="3">Cédula de Extranjería</option>
+                            <option value="4">Tarjeta de Identidad</option>
+                            <option value="5">Pasaporte</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Número Identificación *</label>
-                        <input type="text" name="propNumId" required>
+                        <input type="text" id="propNumId" name="propNumId" required>
                     </div>
                     <div class="form-group full-width">
                         <label>Nombre *</label>
-                        <input type="text" name="propNombre" required>
+                        <input type="text" id="propNombre" name="propNombre" required>
                     </div>
                     <div class="form-group">
                         <label>Municipio *</label>
-                        <input type="text" name="propMunicipio" required>
+                        <select id="propMunicipio" name="propMunicipio" required>
+                            <option value="">Seleccione...</option>
+                            <option value="1">Bogotá D.C.</option>
+                            <option value="2">Medellín</option>
+                            <option value="3">Cali</option>
+                            <option value="4">Barranquilla</option>
+                            <option value="5">Cartagena</option>
+                            <option value="6">Bucaramanga</option>
+                            <option value="7">Pereira</option>
+                            <option value="8">Santa Marta</option>
+                            <option value="9">Manizales</option>
+                            <option value="10">Ibagué</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Sede</label>
-                        <input type="text" name="propSede">
+                        <input type="text" id="propSede" name="propSede">
                     </div>
                 </div>
             </div>
-            <!-- datos generales de la remesa -->
-             <div class="form-section">
+
+            <!-- DATOS GENERALES DE LA REMESA -->
+            <div class="form-section">
                 <h2 class="section-title">Datos Generales de la Remesa</h2>
                 <div class="form-grid">
                     <div class="form-group">
-                        <label >Consecutivo Informacion de Carga</label>
-                        <input type="text" name="consecutivoInfoCarga" required>
-
+                        <label>Consecutivo Información de Carga</label>
+                        <input type="text" id="consecutivoInfoCarga" name="consecutivoInfoCarga" required>
                     </div>
                     <div class="form-group">
-                        <label >Consecutivo Remesa Copia</label>
-                        <input type="text" name="consecutivoRemesaCopia">
+                        <label>Consecutivo Remesa Copia</label>
+                        <input type="text" id="consecutivoRemesaCopia" name="consecutivoRemesaCopia">
                     </div>
                     <div class="form-group">
                         <label>Consecutivo Remesa *</label>
-                        <input type="text" name="consecutivo" required>
+                        <input type="text" id="consecutivo" name="consecutivo" required>
                     </div>
                     <div class="form-group">
                         <label>Orden de Servicio</label>
-                        <input type="text" name="ordenServicio">
+                        <input type="text" id="ordenServicio" name="ordenServicio">
                     </div>
                     <div class="form-group">
                         <label>Tipo Operación *</label>
-                        <select name="tipoOperacion" required>
+                        <select id="tipoOperacion" name="tipoOperacion" required>
                             <option value="">Seleccione...</option>
-                            <option value="general">General</option>
-                            <option value="especial">Especial</option>
+                            <option value="General">General</option>
+                            <option value="Especial">Especial</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Tipo Empaque *</label>
-                        <select name="tipoEmpaque" required>
+                        <select id="tipoEmpaque" name="tipoEmpaque" required>
                             <option value="">Seleccione...</option>
-                            <option value="bulto">Bulto</option>
-                            <option value="caja">Caja</option>
-                            <option value="estiba">Estiba</option>
+                            <option value="Bulto">Bulto</option>
+                            <option value="Caja">Caja</option>
+                            <option value="Estiba">Estiba</option>
+                            <option value="Tambor">Tambor</option>
                         </select>
                     </div>
                 </div>
@@ -118,63 +133,76 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label>Tipo Identificación *</label>
-                        <select name="cargueTipoId" required>
-                            <option value="CC">Cédula Ciudadanía</option>
-                            <option value="NIT">NIT</option>
-                            <option value="CE">Cédula Extranjería</option>
+                        <select id="cargueTipoId" name="cargueTipoId" required>
+                            <option value="">Seleccione...</option>
+                            <option value="1">Cédula de Ciudadanía</option>
+                            <option value="2">NIT</option>
+                            <option value="3">Cédula de Extranjería</option>
+                            <option value="4">Tarjeta de Identidad</option>
+                            <option value="5">Pasaporte</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Número Identificación *</label>
-                        <input type="text" name="cargueNumId" required>
+                        <input type="text" id="cargueNumId" name="cargueNumId" required>
                     </div>
                     <div class="form-group">
-                        <label >Sede</label>
-                        <select name="sedeCargue" id="sedeCargue">
+                        <label>Sede</label>
+                        <select id="sedeCargue" name="sedeCargue">
                             <option value="">Seleccione...</option>
-                            <option value="sede1">Sede 1</option>
-                            <option value="sede2">Sede 2</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label >Codigo Sede</label>
-                        <input type="text" name="codigoSedeCarge" id="codigoSedeCargue" >
+                        <label>Código Sede</label>
+                        <input type="text" id="codigoSedeCargue" name="codigoSedeCargue">
                     </div>
-                    <div class="form-group ">
+                    <div class="form-group">
                         <label>Nombre *</label>
-                        <input type="text" name="cargueNombre" required>
+                        <input type="text" id="cargueNombre" name="cargueNombre" required>
                     </div>
-                    <div class="form-group ">
+                    <div class="form-group">
                         <label>Dirección *</label>
-                        <input type="text" name="cargueDireccion" required>
+                        <input type="text" id="cargueDireccion" name="cargueDireccion" required>
                     </div>
                     <div class="form-group">
                         <label>Municipio *</label>
-                        <input type="text" name="cargueMunicipio" required>
+                        <select id="cargueMunicipio" name="cargueMunicipio" required>
+                            <option value="">Seleccione...</option>
+                            <option value="1">Bogotá D.C.</option>
+                            <option value="2">Medellín</option>
+                            <option value="3">Cali</option>
+                            <option value="4">Barranquilla</option>
+                            <option value="5">Cartagena</option>
+                            <option value="6">Bucaramanga</option>
+                            <option value="7">Pereira</option>
+                            <option value="8">Santa Marta</option>
+                            <option value="9">Manizales</option>
+                            <option value="10">Ibagué</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Fecha Cita *</label>
-                        <input type="date" name="cargueFecha" required>
+                        <input type="date" id="cargueFecha" name="cargueFecha" required>
                     </div>
                     <div class="form-group">
                         <label>Hora Cita *</label>
-                        <input type="time" name="cargueHora" required>
+                        <input type="time" id="cargueHora" name="cargueHora" required>
                     </div>
                     <div class="form-group">
                         <label>Tiempo Cargue (Horas) *</label>
-                        <input type="number" name="cargueTiempoHoras" min="0" required>
+                        <input type="number" id="cargueTiempoHoras" name="cargueTiempoHoras" min="0" required>
                     </div>
                     <div class="form-group">
                         <label>Tiempo Cargue (Minutos)</label>
-                        <input type="number" name="cargueTiempoMin" min="0" max="59">
+                        <input type="number" id="cargueTiempoMin" name="cargueTiempoMin" min="0" max="59">
                     </div>
                     <div class="form-group">
                         <label>Latitud</label>
-                        <input type="text" name="cargueLatitud" placeholder="Ej: 4.6097">
+                        <input type="text" id="cargueLatitud" name="cargueLatitud" placeholder="Ej: 4.6097">
                     </div>
                     <div class="form-group">
                         <label>Longitud</label>
-                        <input type="text" name="cargueLongitud" placeholder="Ej: -74.0817">
+                        <input type="text" id="cargueLongitud" name="cargueLongitud" placeholder="Ej: -74.0817">
                     </div>
                 </div>
             </div>
@@ -185,63 +213,76 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label>Tipo Identificación *</label>
-                        <select name="descargueTipoId" required>
-                            <option value="CC">Cédula Ciudadanía</option>
-                            <option value="NIT">NIT</option>
-                            <option value="CE">Cédula Extranjería</option>
+                        <select id="descargueTipoId" name="descargueTipoId" required>
+                            <option value="">Seleccione...</option>
+                            <option value="1">Cédula de Ciudadanía</option>
+                            <option value="2">NIT</option>
+                            <option value="3">Cédula de Extranjería</option>
+                            <option value="4">Tarjeta de Identidad</option>
+                            <option value="5">Pasaporte</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Número Identificación *</label>
-                        <input type="text" name="descargueNumId" required>
+                        <input type="text" id="descargueNumId" name="descargueNumId" required>
                     </div>
                     <div class="form-group">
-                        <label >Sede</label>
-                        <select name="sedeDescargue" id="sedeDescargue">
+                        <label>Sede</label>
+                        <select id="sedeDescargue" name="sedeDescargue">
                             <option value="">Seleccione...</option>
-                            <option value="sede1">Sede 1</option>
-                            <option value="sede2">Sede 2</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label >Codigo Sede</label>
-                        <input type="text" name="codigoSedeDescarge" id="codigoSedeDescarge" >
-                    </div>                    
-                    <div class="form-group ">
-                        <label>Nombre *</label>
-                        <input type="text" name="descargueNombre" required>
+                        <label>Código Sede</label>
+                        <input type="text" id="codigoSedeDescargue" name="codigoSedeDescargue">
                     </div>
-                    <div class="form-group ">
+                    <div class="form-group">
+                        <label>Nombre *</label>
+                        <input type="text" id="descargueNombre" name="descargueNombre" required>
+                    </div>
+                    <div class="form-group">
                         <label>Dirección *</label>
-                        <input type="text" name="descargueDireccion" required>
+                        <input type="text" id="descargueDireccion" name="descargueDireccion" required>
                     </div>
                     <div class="form-group">
                         <label>Municipio *</label>
-                        <input type="text" name="descargueMunicipio" required>
+                        <select id="descargueMunicipio" name="descargueMunicipio" required>
+                            <option value="">Seleccione...</option>
+                            <option value="1">Bogotá D.C.</option>
+                            <option value="2">Medellín</option>
+                            <option value="3">Cali</option>
+                            <option value="4">Barranquilla</option>
+                            <option value="5">Cartagena</option>
+                            <option value="6">Bucaramanga</option>
+                            <option value="7">Pereira</option>
+                            <option value="8">Santa Marta</option>
+                            <option value="9">Manizales</option>
+                            <option value="10">Ibagué</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Fecha Cita *</label>
-                        <input type="date" name="descargueFecha" required>
+                        <input type="date" id="descargueFecha" name="descargueFecha" required>
                     </div>
                     <div class="form-group">
                         <label>Hora Cita *</label>
-                        <input type="time" name="descargueHora" required>
+                        <input type="time" id="descargueHora" name="descargueHora" required>
                     </div>
                     <div class="form-group">
                         <label>Tiempo Descargue (Horas) *</label>
-                        <input type="number" name="descargueTiempoHoras" min="0" required>
+                        <input type="number" id="descargueTiempoHoras" name="descargueTiempoHoras" min="0" required>
                     </div>
                     <div class="form-group">
                         <label>Tiempo Descargue (Minutos)</label>
-                        <input type="number" name="descargueTiempoMin" min="0" max="59">
+                        <input type="number" id="descargueTiempoMin" name="descargueTiempoMin" min="0" max="59">
                     </div>
                     <div class="form-group">
                         <label>Latitud</label>
-                        <input type="text" name="descargueLatitud" placeholder="Ej: 4.6097">
+                        <input type="text" id="descargueLatitud" name="descargueLatitud" placeholder="Ej: 4.6097">
                     </div>
                     <div class="form-group">
                         <label>Longitud</label>
-                        <input type="text" name="descargueLongitud" placeholder="Ej: -74.0817">
+                        <input type="text" id="descargueLongitud" name="descargueLongitud" placeholder="Ej: -74.0817">
                     </div>
                 </div>
             </div>
@@ -252,302 +293,283 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label>Naturaleza Carga *</label>
-                        <select name="naturalezaCarga" required>
+                        <select id="naturalezaCarga" name="naturalezaCarga" required>
                             <option value="">Seleccione...</option>
-                            <option value="general">General</option>
-                            <option value="peligrosa">Peligrosa</option>
-                            <option value="perecedera">Perecedera</option>
+                            <option value="General">General</option>
+                            <option value="Peligrosa">Peligrosa</option>
+                            <option value="Perecedera">Perecedera</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Código Producto *</label>
-                        <input type="text" name="codigoProducto" required>
+                        <input type="text" id="codigoProducto" name="codigoProducto" required>
                     </div>
                     <div class="form-group">
-                        <label>Capitulo *</label>
-                        <select name="capitulo" id="capitulo">
+                        <label>Capítulo *</label>
+                        <select id="capitulo" name="capitulo">
                             <option value="">Seleccione...</option>
-                            <option value="capitulo1">Capitulo 1</option>
-                            <option value="capitulo2">Capitulo 2</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Partida *</label>
-                        <select name="partida" id="partida">
+                        <select id="partida" name="partida">
                             <option value="">Seleccione...</option>
-                            <option value="partida1">Partida 1</option>
-                            <option value="partida2">Partida 2</option>
                         </select>
-                    </div>      
+                    </div>
                     <div class="form-group">
                         <label>Subpartida *</label>
-                        <select name="subpartida" id="subpartida">
+                        <select id="subpartida" name="subpartida">
                             <option value="">Seleccione...</option>
-                            <option value="subpartida1">Subpartida 1</option>
-                            <option value="subpartida2">Subpartida 2</option>
-                        </select>
-                    </div>                
-                    <div class="form-group">
-                        <label >CodSubpartida</label>
-                        <input type="text" name="codSubpartida" id="codSubpartida" >
-                    </div>
-                    <div class="form-group">
-                        <label>Codigo Arancel *</label>
-                        <select name="codigoArancel" id="codigoArancel">
-                            <option value="">Seleccione...</option>
-                            <option value="codigo1">Partida 1</option>
-                            <option value="codigo2">Partida 2</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label >Cod.Arancel</label>
-                        <input type="text" name="codArancel" id="codArancel" >
+                        <label>Cod.Subpartida</label>
+                        <input type="text" id="codSubpartida" name="codSubpartida">
                     </div>
                     <div class="form-group">
-                        <label for="">Codigo UN</label>
-                        <input type="text" name="codigoUN" >
+                        <label>Código Arancel *</label>
+                        <select id="codigoArancel" name="codigoArancel">
+                            <option value="">Seleccione...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Cod.Arancel</label>
+                        <input type="text" id="codArancel" name="codArancel">
+                    </div>
+                    <div class="form-group">
+                        <label>Código UN</label>
+                        <input type="text" id="codigoUN" name="codigoUN">
                     </div>
                     <div class="form-group">
                         <label>Estado de Producto</label>
-                        <select name="estadoProducto" id="estadoProducto">
+                        <select id="estadoProducto" name="estadoProducto">
                             <option value="">Seleccione...</option>
-                            <option value="nuevo">Nuevo</option>
-                            <option value="usado">Usado</option>
+                            <option value="Nuevo">Nuevo</option>
+                            <option value="Usado">Usado</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Grupo de Embalaje Envase *</label>
-                        <select name="grupoEmbalajeEnvase" id="grupoEmbalajeEnvase">
+                        <select id="grupoEmbalajeEnvase" name="grupoEmbalajeEnvase">
                             <option value="">Seleccione...</option>
-                            <option value="grupo1">Grupo 1</option>
-                            <option value="grupo2">Grupo 2</option>
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
                         </select>
-                    </div>                                              
+                    </div>
                     <div class="form-group full-width">
                         <label>Descripción Producto *</label>
-                        <textarea name="descripcionProducto" rows="3" required></textarea>
+                        <textarea id="descripcionProducto" name="descripcionProducto" rows="3" required></textarea>
                     </div>
                     <div class="form-group full-width">
-                        <label>Nombre Tecnico o Grupo Quimico del N.E.P. *</label>
-                        <textarea name="nombreTecnicoGrupoQuimico" rows="3" required></textarea>
-                    </div> 
-                    <div class="form-group full-width">
-                        <label for="">"En ésta casilla se describe el nombre o grupo químico de la sustancia que le aporta el peligro, por tratarse de un NO Especificado en otra Parte"</label>
+                        <label>Nombre Técnico o Grupo Químico del N.E.P.</label>
+                        <textarea id="nombreTecnicoGrupoQuimico" name="nombreTecnicoGrupoQuimico" rows="3"></textarea>
                     </div>
                     <div class="form-group full-width">
-                        <label>Descripcion Detallada Residuaos Peligroso*</label>
-                        <textarea name="descripcionDetalladaResiduosPeligrosos" rows="3" required></textarea>
+                        <label>En ésta casilla se describe el nombre o grupo químico de la sustancia que le aporta el peligro, por tratarse de un NO Especificado en otra Parte</label>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Descripción Detallada Residuos Peligrosos</label>
+                        <textarea id="descripcionDetalladaResiduosPeligrosos" name="descripcionDetalladaResiduosPeligrosos" rows="3"></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Caractetisticas Peligrocidad *</label>
-                        <select name="caracteristicasPeligrocidad" required>
-                            <option value="bajo">bajo</option>
-                            <option value="medio">medio</option>
-                            <option value="alto">alto</option>
+                        <label>Características Peligrosidad</label>
+                        <select id="caracteristicasPeligrosidad" name="caracteristicasPeligrosidad">
+                            <option value="">Seleccione...</option>
+                            <option value="bajo">Bajo</option>
+                            <option value="medio">Medio</option>
+                            <option value="alto">Alto</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Corrientes de Residuos Peligrosos *</label>
-                        <select name="corrientesResiduosPeligrosos" required>
-                            <option value="bajo">bajo</option>
-                            <option value="medio">medio</option>
-                            <option value="alto">alto</option>
+                        <label>Corrientes de Residuos Peligrosos</label>
+                        <select id="corrientesResiduosPeligrosos" name="corrientesResiduosPeligrosos">
+                            <option value="">Seleccione...</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Desagregacion *</label>
-                        <select name="desagregacion" required>
-                            <option value="bajo">bajo</option>
-                            <option value="medio">medio</option>
-                            <option value="alto">alto</option>
+                        <label>Desagregación</label>
+                        <select id="desagregacion" name="desagregacion">
+                            <option value="">Seleccione...</option>
                         </select>
                     </div>
-
                 </div>
             </div>
-            <!-- empaque y cantidad -->
-<div class="form-section">
-    <h2 class="section-title">Empaque y Cantidad del Producto</h2>
 
-    <div class="form-grid">
-
-        <!-- Unidad medida producto -->
-        <div class="form-group">
-            <label>Unidad Medida del Producto *</label>
-            <select name="unidadMedidaProducto" required>
-                <option value="KG">Kilogramo</option>
-                <option value="TON">Tonelada</option>
-                <option value="GAL">Galón</option>
-                <option value="LT">Litro</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Cantidad *</label>
-            <input type="number" name="cantidadProducto" step="0.01" required>
-        </div>
-
-        <!-- Unidad medida transporte -->
-        <div class="form-group">
-            <label>Unidad Medida Transporte *</label>
-            <select name="unidadMedidaTransporte" required>
-                <option value="KG">Kilogramo</option>
-                <option value="TON">Tonelada</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Cantidad *</label>
-            <input type="number" name="cantidadTransporte" step="0.01" required>
-        </div>
-
-        <!-- Empaque primario -->
-        <div class="form-group">
-            <label>Empaque Primario o Interno *</label>
-            <select name="empaquePrimario" required>
-                <option value="">Seleccione...</option>
-                <option value="caja">Caja</option>
-                <option value="saco">Saco</option>
-                <option value="bulto">Bulto</option>
-                <option value="estiba">Estiba</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Material *</label>
-            <select name="materialPrimario" required>
-                <option value="">Seleccione...</option>
-                <option value="carton">Cartón</option>
-                <option value="plastico">Plástico</option>
-                <option value="madera">Madera</option>
-                <option value="metal">Metal</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Código</label>
-            <input type="text" name="codigoPrimario">
-        </div>
-
-        <!-- Empaque externo -->
-        <div class="form-group">
-            <label>Empaque Externo</label>
-            <select name="empaqueExterno">
-                <option value="">Seleccione...</option>
-                <option value="caja">Caja</option>
-                <option value="contenedor">Contenedor</option>
-                <option value="estiba">Estiba</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Material</label>
-            <select name="materialExterno">
-                <option value="">Seleccione...</option>
-                <option value="carton">Cartón</option>
-                <option value="plastico">Plástico</option>
-                <option value="madera">Madera</option>
-                <option value="metal">Metal</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Código</label>
-            <input type="text" name="codigoExterno">
-        </div>
-
-        <!-- Peso contenedor vacío -->
-        <div class="form-group">
-            <label>Peso Contenedor Vacío</label>
-            <input type="number" name="pesoContenedorVacio" step="0.01">
-        </div>
-
-        <div class="form-group">
-            <label>Kilos</label>
-            <input type="number" name="kilosContenedorVacio" step="0.01">
-        </div>
-
-    </div>
-</div>
-
-
+            <!-- EMPAQUE Y CANTIDAD -->
+            <div class="form-section">
+                <h2 class="section-title">Empaque y Cantidad del Producto</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Unidad Medida del Producto *</label>
+                        <select id="unidadMedidaProducto" name="unidadMedidaProducto" required>
+                            <option value="">Seleccione...</option>
+                            <option value="1">Kilogramo (KG)</option>
+                            <option value="2">Tonelada (TON)</option>
+                            <option value="3">Libra (LB)</option>
+                            <option value="4">Galón (GAL)</option>
+                            <option value="5">Litro (LT)</option>
+                            <option value="6">Metro Cúbico (M3)</option>
+                            <option value="7">Unidad (UND)</option>
+                            <option value="8">Caja (CAJ)</option>
+                            <option value="9">Bulto (BLT)</option>
+                            <option value="10">Estiba (EST)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Cantidad *</label>
+                        <input type="number" id="cantidadProducto" name="cantidadProducto" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Unidad Medida Transporte *</label>
+                        <select id="unidadMedidaTransporte" name="unidadMedidaTransporte" required>
+                            <option value="">Seleccione...</option>
+                            <option value="1">Kilogramo (KG)</option>
+                            <option value="2">Tonelada (TON)</option>
+                            <option value="3">Libra (LB)</option>
+                            <option value="4">Galón (GAL)</option>
+                            <option value="5">Litro (LT)</option>
+                            <option value="6">Metro Cúbico (M3)</option>
+                            <option value="7">Unidad (UND)</option>
+                            <option value="8">Caja (CAJ)</option>
+                            <option value="9">Bulto (BLT)</option>
+                            <option value="10">Estiba (EST)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Cantidad *</label>
+                        <input type="number" id="cantidadTransporte" name="cantidadTransporte" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Empaque Primario o Interno *</label>
+                        <select id="empaquePrimario" name="empaquePrimario" required>
+                            <option value="">Seleccione...</option>
+                            <option value="Caja">Caja</option>
+                            <option value="Saco">Saco</option>
+                            <option value="Bulto">Bulto</option>
+                            <option value="Estiba">Estiba</option>
+                            <option value="Tambor">Tambor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Material *</label>
+                        <select id="materialPrimario" name="materialPrimario" required>
+                            <option value="">Seleccione...</option>
+                            <option value="Cartón">Cartón</option>
+                            <option value="Plástico">Plástico</option>
+                            <option value="Madera">Madera</option>
+                            <option value="Metal">Metal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Código</label>
+                        <input type="text" id="codigoPrimario" name="codigoPrimario">
+                    </div>
+                    <div class="form-group">
+                        <label>Empaque Externo</label>
+                        <select id="empaqueExterno" name="empaqueExterno">
+                            <option value="">Seleccione...</option>
+                            <option value="Caja">Caja</option>
+                            <option value="Contenedor">Contenedor</option>
+                            <option value="Estiba">Estiba</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Material</label>
+                        <select id="materialExterno" name="materialExterno">
+                            <option value="">Seleccione...</option>
+                            <option value="Cartón">Cartón</option>
+                            <option value="Plástico">Plástico</option>
+                            <option value="Madera">Madera</option>
+                            <option value="Metal">Metal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Código</label>
+                        <input type="text" id="codigoExterno" name="codigoExterno">
+                    </div>
+                    <div class="form-group">
+                        <label>Peso Contenedor Vacío</label>
+                        <input type="number" id="pesoContenedorVacio" name="pesoContenedorVacio" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Kilos</label>
+                        <input type="number" id="kilosContenedorVacio" name="kilosContenedorVacio" step="0.01">
+                    </div>
+                </div>
+            </div>
 
             <!-- SEGURO MERCANCÍA -->
-<div class="form-section">
-    <h2 class="section-title">Seguro de Mercancía</h2>
-
-    <div class="form-grid">
-
-        <!-- Póliza General -->
-        <div class="form-group">
-            <label>Tipo Póliza *</label>
-            <input type="text" name="tipoPolizaGeneral" value="Gen" readonly>
-        </div>
-
-        <div class="form-group">
-            <label>Tomador de la póliza *</label>
-            <select name="tomadorPolizaGeneral" required>
-                <option value="empresa_transportadora">Empresa Transportadora</option>
-                <option value="remitente">Remitente</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Número *</label>
-            <input type="text" name="numeroPolizaGeneral" value="1070000035901" required>
-        </div>
-
-        <div class="form-group">
-            <label>Fecha Vencimiento *</label>
-            <input type="date" name="fechaVencimientoGeneral" value="2026-06-30" required>
-        </div>
-
-        <div class="form-group">
-            <label>Aseguradora *</label>
-            <select name="aseguradoraGeneral" required>
-                <option value="seguros_comerciales">SEGUROS COMERCIALES</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>NIT Aseguradora *</label>
-            <input type="text" name="nitAseguradoraGeneral" value="8600021807" required>
-        </div>
-
-        <!-- Póliza Mercancía Peligrosa -->
-        <div class="form-group">
-            <label>Tipo Póliza *</label>
-            <input type="text" name="tipoPolizaPeligrosa" value="Pelig" readonly>
-        </div>
-
-        <div class="form-group">
-            <label>Tomador de la póliza *</label>
-            <select name="tomadorPolizaPeligrosa" required>
-                <option value="empresa_transportadora">Empresa Transportadora</option>
-                <option value="remitente">Remitente</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Número *</label>
-            <input type="text" name="numeroPolizaPeligrosa" value="1070000035901" required>
-        </div>
-
-        <div class="form-group">
-            <label>Fecha Vencimiento *</label>
-            <input type="date" name="fechaVencimientoPeligrosa" value="2026-06-30" required>
+            <div class="form-section">
+                <h2 class="section-title">Seguro de Mercancía</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Tipo Póliza *</label>
+                        <input type="text" id="tipoPolizaGeneral" name="tipoPolizaGeneral"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tomador de la póliza *</label>
+                        <select id="tomadorPolizaGeneral" name="tomadorPolizaGeneral" required>
+                            <option value="">Seleccione...</option>
+                            <option value="Empresa Transportadora">Empresa Transportadora</option>
+                            <option value="Remitente">Remitente</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Número *</label>
+                        <input type="text" id="numeroPolizaGeneral" name="numeroPolizaGeneral"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha Vencimiento *</label>
+                        <input type="date" id="fechaVencimientoGeneral" name="fechaVencimientoGeneral"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>Aseguradora *</label>
+                        <select id="aseguradoraGeneral" name="aseguradoraGeneral" required>
+                            <option value="">Seleccione...</option>
+                            <option value="1">SEGUROS COMERCIALES S.A.</option>
+                            <option value="2">SEGUROS BOLIVAR S.A.</option>
+                            <option value="3">SURA S.A.</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>NIT Aseguradora *</label>
+                        <input type="text" id="nitAseguradoraGeneral" name="nitAseguradoraGeneral" value="8600021807" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo Póliza *</label>
+                        <input type="text" id="tipoPolizaPeligrosa" name="tipoPolizaPeligrosa"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tomador de la póliza *</label>
+                        <select id="tomadorPolizaPeligrosa" name="tomadorPolizaPeligrosa" required>
+                            <option value="">Seleccione...</option>
+                            <option value="Empresa Transportadora">Empresa Transportadora</option>
+                            <option value="Remitente">Remitente</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Número *</label>
+                        <input type="text" id="numeroPolizaPeligrosa" name="numeroPolizaPeligrosa"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha Vencimiento *</label>
+                        <input type="date" id="fechaVencimientoPeligrosa"  required>
         </div>
 
         <div class="form-group">
             <label>Aseguradora *</label>
             <select name="aseguradoraPeligrosa" required>
-                <option value="seguros_comerciales">SEGUROS COMERCIALES</option>
+                            <option value="">Seleccione...</option>
+                            <option value="1">SEGUROS COMERCIALES S.A.</option>
+                            <option value="2">SEGUROS BOLIVAR S.A.</option>
+                            <option value="3">SURA S.A.</option>
             </select>
         </div>
 
         <div class="form-group">
             <label>NIT Aseguradora *</label>
-            <input type="text" name="nitAseguradoraPeligrosa" value="8600021807" required>
+            <input type="text" name="nitAseguradoraPeligrosa"  required>
         </div>
 
     </div>
@@ -568,23 +590,23 @@
         <!-- Transbordo 1 -->
         <div class="form-group">
             <label>Municipio Transbordo 1</label>
-            <input type="text" name="municipioTransbordo1">
+            <input type="text" name="municipioTransbordo1" id="municipioTransbordo1">
         </div>
 
         <div class="form-group">
             <label>Codigo 1</label>
-            <input type="text" name="codigoMunicipioTransbordo1">
+            <input type="text" name="codigoMunicipioTransbordo1" id="codigoMunicipioTransbordo1">
         </div>
 
         <!-- Transbordo 2 -->
         <div class="form-group">
             <label>Municipio Transbordo 2</label>
-            <input type="text" name="municipioTransbordo2">
+            <input type="text" name="municipioTransbordo2" id="municipioTransbordo2">
         </div>
 
         <div class="form-group">
             <label>Codigo 2</label>
-            <input type="text" name="codigoMunicipioTransbordo2">
+            <input type="text" name="codigoMunicipioTransbordo2" id="codigoMunicipioTransbordo2">
         </div>
 
     </div>
@@ -597,7 +619,7 @@
                 <div class="form-grid">
                     <div class="form-group full-width">
                         <label>Observaciones Adicionales</label>
-                        <textarea name="observaciones" rows="4" placeholder="Ingrese observaciones adicionales sobre la remesa..."></textarea>
+                        <textarea name="observaciones" id="observaciones" rows="4" placeholder="Ingrese observaciones adicionales sobre la remesa..."></textarea>
                     </div>
                 </div>
             </div>

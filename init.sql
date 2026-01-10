@@ -480,6 +480,13 @@ CREATE TABLE manifiesto_remesas (
     UNIQUE KEY unique_manifiesto_remesa (id_manifiesto, id_remesa)
 );
 
+
+
+
+
+
+
+
 -- =============================
 -- ÍNDICES PARA MEJORAR CONSULTAS
 -- =============================
