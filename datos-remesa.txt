@@ -1,0 +1,9 @@
+nombre de empresa--TRANSPORTES QUIROGA S.A.S
+nit empresa-- 8020099265
+usuario---Admin Principal
+consecucuon de remesa -- tiene que ser nuevo 
+latutud--100
+longitud--100
+--
+1municipio-trasbordo--Medellín
+2municipio-trasbordo--Medellín
