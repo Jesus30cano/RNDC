@@ -27,7 +27,14 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label>Nombre Empresa</label>
-                        <input type="text" id="nombreEmpresa" name="nombreEmpresa" value="" required>
+                        
+                        <select id="nombreEmpresa" name="nombreEmpresa" required>
+                            <option value="">Seleccione...</option>
+                            <option value="TRANSPORTES QUIROGA S.A.S">TRANSPORTES QUIROGA S.A.S</option>
+                            <option value="ALIMENTOS DEL VALLE S.A.">ALIMENTOS DEL VALLE S.A.</option>
+                            <option value="INDUSTRIAS QUÍMICAS LTDA">INDUSTRIAS QUÍMICAS LTDA</option>
+                            
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>NIT Empresa</label>
@@ -35,7 +42,7 @@
                     </div>
                     <div class="form-group">
                         <label>Usuario</label>
-                        <input type="text" id="usuario" name="usuario" value="" required>
+                        <input type="text" id="usuario" name="usuario" value="Admin Principal" readonly>
                     </div>
                 </div>
             </div>
@@ -590,7 +597,21 @@
         <!-- Transbordo 1 -->
         <div class="form-group">
             <label>Municipio Transbordo 1</label>
-            <input type="text" name="municipioTransbordo1" id="municipioTransbordo1">
+            
+            
+                        <select id="municipioTransbordo1" name="municipioTransbordo1" required>
+                            <option value="">Seleccione...</option>
+                            <option value="Bogotá D.C.">Bogotá D.C.</option>
+                            <option value="Medellín">Medellín</option>
+                            <option value="Cali">Cali</option>
+                            <option value="Barranquilla">Barranquilla</option>
+                            <option value="Cartagena">Cartagena</option>
+                            <option value="Bucaramanga">Bucaramanga</option>
+                            <option value="Pereira">Pereira</option>
+                            <option value="Santa Marta">Santa Marta</option>
+                            <option value="Manizales">Manizales</option>
+                            <option value="Ibagué">Ibagué</option>
+                        </select>
         </div>
 
         <div class="form-group">
@@ -601,7 +622,19 @@
         <!-- Transbordo 2 -->
         <div class="form-group">
             <label>Municipio Transbordo 2</label>
-            <input type="text" name="municipioTransbordo2" id="municipioTransbordo2">
+            <select id="municipioTransbordo2" name="municipioTransbordo2" required>
+                            <option value="">Seleccione...</option>
+                            <option value="Bogotá D.C.">Bogotá D.C.</option>
+                            <option value="Medellín">Medellín</option>
+                            <option value="Cali">Cali</option>
+                            <option value="Barranquilla">Barranquilla</option>
+                            <option value="Cartagena">Cartagena</option>
+                            <option value="Bucaramanga">Bucaramanga</option>
+                            <option value="Pereira">Pereira</option>
+                            <option value="Santa Marta">Santa Marta</option>
+                            <option value="Manizales">Manizales</option>
+                            <option value="Ibagué">Ibagué</option>
+                        </select>
         </div>
 
         <div class="form-group">
