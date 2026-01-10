@@ -14,7 +14,7 @@
         </div>
         <div class="header-actions">
             <a href="index.php?c=dashboard&a=index" class="btn-back">← Volver al Dashboard</a>
-            <button class="index.php?c=dashbo" onclick="logout()">Cerrar Sesión</button>
+            <button class="btn-logout" onclick="logout()">Cerrar Sesión</button>
         </div>
         <img src="/RNDC/public/assets/images/transporte.webp" alt="Ministerio de Transporte" class="logo-right">
     </header>
