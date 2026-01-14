@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group">
                         <label>NIT Empresa</label>
-                        <input type="text" id="nitEmpresa" name="nitEmpresa" value="" required>
+                        <input type="text" id="nitEmpresa" name="nitEmpresa" value="" readonly>
                     </div>
                     <div class="form-group">
                         <label>Usuario</label>

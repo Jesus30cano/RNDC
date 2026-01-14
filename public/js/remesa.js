@@ -3,6 +3,29 @@
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('remesaForm');
+    // ===============================
+    // AUTOLLENADO DE NIT POR EMPRESA
+    // ===============================
+    const empresaSelect = document.getElementById('nombreEmpresa');
+    const nitInput = document.getElementById('nitEmpresa');
+
+    const empresasNIT = {
+        "TRANSPORTES QUIROGA S.A.S": "8020099265",
+        "ALIMENTOS DEL VALLE S.A.": "8901234567",
+        "INDUSTRIAS QUÍMICAS LTDA": "8902345678"
+    };
+
+    if (empresaSelect && nitInput) {
+        empresaSelect.addEventListener('change', function () {
+            const empresaSeleccionada = this.value;
+
+            if (empresasNIT[empresaSeleccionada]) {
+                nitInput.value = empresasNIT[empresaSeleccionada];
+            } else {
+                nitInput.value = "";
+            }
+        });
+    }
     
     if (form) {
         form.addEventListener('submit', function(e) {
